@@ -1,0 +1,63 @@
+# ===================================================================
+# COMMON SPRING BOOT PROPERTIES
+# ===================================================================
+
+# logging configuration
+logging:
+    file: logs/agchallenge.log
+    pattern:
+        file: "%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n"
+    level:
+        ROOT: INFO
+        com.autogeneral.agchallenge: INFO
+
+# ===================================================================
+
+# spring application configurations
+spring:
+    application:
+        name: AutoGeneralApp
+    # datasource configurations
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:h2:mem:autogeneraldb
+        driverClassName: org.h2.Driver
+        username: sa
+        password: password
+    # jpa configurations
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        database: h2
+        show-sql: false
+        generate-ddl: false
+    # h2 DB configurations
+    h2:
+      console:        enabled: true
+        path: /h2console
+    # jackson serialization for datetime
+    jackson:
+       serialization:
+          WRITE_DATES_AS_TIMESTAMPS: false
+          
+#====================================================================       
+
+# actuator
+management:
+    endpoints:
+       web:
+          base-path: /
+          exposure:
+             include: status, health
+
+# ===================================================================
+
+# application port
+server:
+    port: 8181
+    servlet:
+       context-path: /test/1.0
+    error:
+      whitelabel:
+        enabled: false
+
+# ===================================================================
